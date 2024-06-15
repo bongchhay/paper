@@ -11,7 +11,7 @@ include '../connect_SPL/connect_SPL.php';
 <?php
   // Create database connection
   include '../connect_SPL/connect_SPL.php';
-
+  $not= 001;
   // Initialize message variable
   $msg = "";
 
@@ -30,6 +30,13 @@ include '../connect_SPL/connect_SPL.php';
         $target = "images/".basename($image);
         // Get text
        $DateClickToPay = mysqli_real_escape_string($con, $_POST['DateClickToPay']);
+
+       if (empty($image) || empty($StudantID) || empty($ClassID) || empty($PayMonthly) || empty($PhoneNumber) || empty($target) || empty($DateClickToPay)) {
+        // header("Location: ../ViweClassRoom/ShowYearMonthDay.php");
+                // exit();
+          $not= 000;
+              
+      }else{
         $sql = "INSERT INTO studentpay_old (InvoiceNumber,StudantID,ClassID,PayMonthly,PhoneNumber,text,image,DateClickToPay) VALUES ('$InvoiceNumber','$StudantID','$ClassID','$PayMonthly','$PhoneNumber','$text', '$image', '$DateClickToPay')";
         // execute query
         mysqli_query($con, $sql);
@@ -40,7 +47,7 @@ include '../connect_SPL/connect_SPL.php';
                 $msg = "Failed to upload image";
         }
         header('location:StudentPay.php');
-  }
+  
 ?>
 <?php
   // Create database connection
@@ -73,8 +80,8 @@ include '../connect_SPL/connect_SPL.php';
         }else{
                 $msg = "Failed to upload image";
         }
-        header('location:StudentPay.php');
-  }
+        header('location:../TuitionFees/ViewTuitionFees_student.php');
+  }}}
 ?>
 <!DOCTYPE html>
 <html>
@@ -83,6 +90,7 @@ include '../connect_SPL/connect_SPL.php';
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <link rel="stylesheet" href="teat.css">
+        <link rel="stylesheet" href="MMM1.css">
         <script src="teat.js"></script>
         <title>联华学校</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
@@ -119,6 +127,7 @@ include '../connect_SPL/connect_SPL.php';
         width: 325px;
         height: 400px;
    }
+
 </style>
 </head>
 
@@ -139,19 +148,36 @@ include '../connect_SPL/connect_SPL.php';
 <a href="../View_Class/student_view_class.php" class="text-light"><input name="btnsearch" type="submit" class="btn btn-primary" style="width:400px;height:50px;" value="ចុចមើលវិក័យប័ត្រ"></a>
 </center>
 </div><!-- divបិទIP3 -->
-<div class="IP7">            
+<div class="IP7">   
+       
   <div class="IP5">
     <div class="IP6">
+    <?php
+      if ($not == "000"){
+        
+        echo '
+        <div class="SSS">
+        <center>
+        <br>
+<h1 style="color:black ; background-color:#f03030;">សុំទោស។អ្នកបញ្ចូលទិន្នន័យខ្វះហើយសូមបញ្ចូលម្ដងទៀត!!!</h1>
+</center>
+ </div>
+ <br>
+        ';
+      }
+      ?>  
       <?php 
       date_default_timezone_set('Asia/Kolkata');
       $date2 =  date ("Y/m/d") ;
       ?>
   <form method="POST" action="StudentPay.php" enctype="multipart/form-data">
   <div class="IP10">
+    <br><br>
     <!-- <label >InvoiceNumber</label> -->
-    <input type="text" class="form-control" style="width:200px;" name="InvoiceNumber" value=<?php echo $PV;?>>
+    <input type="text" class="form-control" style="width:200px;" name="InvoiceNumber"  value=<?php echo $PV;?>>
   </div><!-- បិទ<div class="IP10"> -->
-  <div class="IP11"></div><!-- បិទ<div class="IP11"> -->
+  <div class="IP11">        </div>
+  <!-- បិទ<div class="IP11"> -->
   <p class="font3">លេខវិក័យបត្រ:NVOP<?php echo $PV;?></p>
        <div class="form-group">
        <label style="width:1245px;">StudantID/លេខម្គាល់សិស្ស:</label>
@@ -195,7 +221,8 @@ include '../connect_SPL/connect_SPL.php';
         </div>
 
         <div>
-        <button class="btn btn-primary" type="submit" name="upload" style="width:1245px;height:50px;" onclick="alert('អរគុណចំពោះការបង់លុយថ្លៃសិក្សា!!!')">POST</button>
+        <!-- <button class="btn btn-primary" type="submit" name="upload" style="width:1245px;height:50px;" onclick="alert('អរគុណចំពោះការបង់លុយថ្លៃសិក្សា!!!')">POST</button> -->
+        <button class="btn btn-primary" type="submit" name="upload" style="width:1245px;height:50px;" >POST</button>
         </div>
   </form>
        <div class="IP8"><div><!-- divបិទIP8_បិទថ្ងៃចុចបង់កុំម៉ោយកែកើត -->
