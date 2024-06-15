@@ -17,37 +17,6 @@ include '../connect_SPL/connect_SPL.php';
           $PV=$row['ID'];
         }
        }
-  ?>
-
-<!-- add -->
-<?php
-include '../connect_SPL/connect_SPL.php';
-if(isset($_POST['submit'])){
-  $StudenID=$_POST['StudenID'];
-  $ClassID=$_POST['ClassID'];
-  $ManyMonths=$_POST['ManyMonths'];
-  $Payment=$_POST['Payment'];
-  $StartDate=$_POST['StartDate'];
-  $EndDate=$_POST['EndDate'];
-  $Discount=$_POST['Discount'];
-  $PaymentDate=$_POST['PaymentDate'];
-  $InvoiceNumber=$_POST['InvoiceNumber'];
-  $Other=$_POST['Other'];
-  $PayBack=$_POST['PayBack'];
-  $BackMonth=$_POST['BackMonth'];
-  $sql="insert into `tbl_payment_old`(StudenID,ClassID,ManyMonths,Payment,StartDate,EndDate,Discount,PaymentDate,InvoiceNumber,Other,PayBack,BackMonth)values('$StudenID','$ClassID','$ManyMonths','$Payment','$StartDate','$EndDate','$Discount','$PaymentDate','$InvoiceNumber','$Other','$PayBack','$BackMonth')";
-$result=mysqli_query($con,$sql);
-//     if($result){
-//         // echo"successfully";
-//         header('location:teacher.php');
-//     }
-//     else{
-//     die(mysqli_error($con));
-// }
-}
-?>
-<!-- update -->
-<?php
 include '../connect_SPL/connect_SPL.php';
 $id=$_GET['updateid'];
 $sql="Select * from `tbl_payment` where ID=$id";
@@ -56,7 +25,7 @@ $row=mysqli_fetch_assoc($result);
 $StudenID=$row['StudenID'];
 $ClassID=$row['ClassID'];
 $ManyMonths=$row['ManyMonths'];
-$Payment=$row['Payment'];
+// $Payment=$row['Payment'];
 $StartDate=$row['StartDate'];
 $EndDate=$row['EndDate'];
 $Discount=$row['Discount'];
@@ -64,7 +33,12 @@ $PaymentDate=$row['PaymentDate'];
 $InvoiceNumber=$row['InvoiceNumber'];
 $Other=$row['Other'];
 $PayBack=$row['PayBack'];
+  ?>
 
+<!-- add -->
+<?php
+include '../connect_SPL/connect_SPL.php';
+$not= 001;
 if(isset($_POST['submit'])){
   $StudenID=$_POST['StudenID'];
   $ClassID=$_POST['ClassID'];
@@ -78,23 +52,33 @@ if(isset($_POST['submit'])){
   $Other=$_POST['Other'];
   $PayBack=$_POST['PayBack'];
   $BackMonth=$_POST['BackMonth'];
+  if (empty($StudenID) || empty($ClassID) || empty($ManyMonths) || empty($StartDate) || empty($EndDate) || empty($Payment) || empty($PaymentDate)) {
+	  // header("Location: ../ViweClassRoom/ShowYearMonthDay.php");
+		        // exit();
+      $not= 000;
+      include '../connect_SPL/connect_SPL.php';
+      $id=$_GET['updateid'];
+      $sql="Select * from `tbl_payment` where ID=$id";
+      $result=mysqli_query($con,$sql);
+      $row=mysqli_fetch_assoc($result);
+      $StudenID=$row['StudenID'];
+      $ClassID=$row['ClassID'];
+      $ManyMonths=$row['ManyMonths'];
+      // $Payment=$row['Payment'];
+      $StartDate=$row['StartDate'];
+      $EndDate=$row['EndDate'];
+      $Discount=$row['Discount'];
+      $PaymentDate=$row['PaymentDate'];
+      $InvoiceNumber=$row['InvoiceNumber'];
+      $Other=$row['Other'];
+      $PayBack=$row['PayBack'];
+	}else{
+  $sql="insert into `tbl_payment_old`(StudenID,ClassID,ManyMonths,Payment,StartDate,EndDate,Discount,PaymentDate,InvoiceNumber,Other,PayBack,BackMonth)values('$StudenID','$ClassID','$ManyMonths','$Payment','$StartDate','$EndDate','$Discount','$PaymentDate','$InvoiceNumber','$Other','$PayBack','$BackMonth')";
+$result=mysqli_query($con,$sql);
+
   $sql="insert into `datayear`(StudenID,ClassID,ManyMonths,Payment,StartDate,EndDate,Discount,PaymentDate,InvoiceNumber,Other,PayBack,BackMonth)values('$StudenID','$ClassID','$ManyMonths','$Payment','$StartDate','$EndDate','$Discount','$PaymentDate','$InvoiceNumber','$Other','$PayBack','$BackMonth')";
   $result=mysqli_query($con,$sql);
-}
 
-if(isset($_POST['submit'])){
-  $StudenID=$_POST['StudenID'];
-  $ClassID=$_POST['ClassID'];
-  $ManyMonths=$_POST['ManyMonths'];
-  $Payment=$_POST['Payment'];
-  $StartDate=$_POST['StartDate'];
-  $EndDate=$_POST['EndDate'];
-  $Discount=$_POST['Discount'];
-  $PaymentDate=$_POST['PaymentDate'];
-  $InvoiceNumber=$_POST['InvoiceNumber'];
-  $Other=$_POST['Other'];
-  $PayBack=$_POST['PayBack'];
-  $BackMonth=$_POST['BackMonth'];
   $sql="insert into `tbl_payment`(StudenID,ClassID,ManyMonths,Payment,StartDate,EndDate,Discount,PaymentDate,InvoiceNumber,Other,PayBack,BackMonth)values('$StudenID','$ClassID','$ManyMonths','$Payment','$StartDate','$EndDate','$Discount','$PaymentDate','$InvoiceNumber','$Other','$PayBack','$BackMonth')";
   $result=mysqli_query($con,$sql);
 //លុប
@@ -121,7 +105,7 @@ if(isset($_POST['submit'])){
     else{
     die(mysqli_error($con));
 }
-}
+}}
 ?>
 
 <!doctype html>
@@ -152,17 +136,26 @@ if(isset($_POST['submit'])){
       date_default_timezone_set('Asia/Kolkata');
       $date2 =  date ("Y/m/d") ;
       ?>
+                <?php
+      if ($not == "000"){
+        echo '
+        <center>
+<h1 style="color:black ; background-color:#f03030;">សុំទោស។អ្នកបញ្ចូលទិន្នន័យខ្វះហើយសូមបញ្ចូលម្ដងទៀត!!!</h1>
+</center>
+        ';
+      }
+      ?>
     <div class="container">
 
     <?php
   echo '
     <form method="post">
 
-    <div class="IP5">
+    <div class="SSS">
     <!-- <label >InvoiceNumber</label> -->
-    <input type="text" class="form-control" name="InvoiceNumber" value='.$PV.' >
-  </div><!-- បិទ<div class="IP5"> -->
-  <div class="IP6"></div>
+    <input type="text" class="form-control" name="InvoiceNumber" style="width:100px;height:20px;" value='.$PV.' >
+  </div><!-- បិទ<div class="SSS"> -->
+  <div class="IPP6"></div>
   
 <p class="font3">លេខវិក័យបត្រ: NVP'.$PV.'</p>
 
@@ -187,7 +180,7 @@ if(isset($_POST['submit'])){
   <div class="form-group">
     <label >Discount</label>
     <input type="number" class="form-control"
-    placeholder="Enter your Discount" name="Discount" autocomplete="off" >
+    placeholder="Enter your Discount" name="Discount" autocomplete="off" value= 0 >
   </div>
 
   <div class="form-group">

@@ -9,6 +9,7 @@
 </head>
 <?php
 include '../connect_SPL/connect_SPL.php';
+$not= 001;
 if(isset($_POST['submit'])){
           $BookLevel=$_POST['BookLevel'];
           $Teacher=$_POST['TeacherID'];
@@ -18,6 +19,12 @@ if(isset($_POST['submit'])){
           $TuitionFees=$_POST['TuitionFees'];
           $RoomNumber=$_POST['RoomNumber'];
           $Other=$_POST['Other'];
+          if (empty($BookLevel & $Teacher & $StudyDate & $StudyTime & $StudyDay & $TuitionFees & $RoomNumber)) {
+            // header("Location: ../ViweClassRoom/ShowYearMonthDay.php");
+                    // exit();
+              $not= 000;
+                  
+          }else{
     $sql="insert into `tbl_class_old`(BookLevel,TeacherID,StudyDate,StudyTime,StudyDay,TuitionFees,RoomNumber,Other)values('$BookLevel','$Teacher','$StudyDate','$StudyTime','$StudyDay','$TuitionFees','$RoomNumber','$Other')";
     $result=mysqli_query($con,$sql);
 //     if($result){
@@ -27,7 +34,7 @@ if(isset($_POST['submit'])){
 //     else{
 //     die(mysqli_error($con));
 // }
-}
+
 ?>
 
 <?php
@@ -73,7 +80,7 @@ $result=mysqli_query($con,$sql);
     else{
     die(mysqli_error($con));
 }
-}
+}}}
 ?>
 <!doctype html>
 <html lang="en">
@@ -99,6 +106,15 @@ $result=mysqli_query($con,$sql);
   <table border="2" width="1258px" style="border-collapse:collapse;" class="table1">
   <tr>
     <th>
+    <?php
+      if ($not == "000"){
+        echo '
+        <center>
+<h1 style="color:black ; background-color:#f03030;">សុំទោស។អ្នកបញ្ចូលទិន្នន័យខ្វះហើយសូមបញ្ចូលម្ដងទៀត!!!</h1>
+</center>
+        ';
+      }
+      ?>
     <div class="container">
     <form method="post">
 
@@ -160,7 +176,7 @@ $result=mysqli_query($con,$sql);
 <tr>
   <th>
 <a href="class.php" class="text-light"><input name="btnsearch" class="btn btn-danger" style="width:623px;height:50px;" value="BACK"></a>
-<button type="submit" class="btn btn-primary" name="submit" style="width:622px;height:50px;" onclick="alert('AddClass Successfully!!!')">Add</button>
+<button type="submit" class="btn btn-primary" name="submit" style="width:622px;height:50px;" >Add</button>
 </th>
 </tr>
 </form>

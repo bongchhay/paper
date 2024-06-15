@@ -21,6 +21,7 @@ include '../connect_SPL/connect_SPL.php';
 
 <?php
 include '../connect_SPL/connect_SPL.php';
+$not= 001;
 if(isset($_POST['submit'])){
   $StudenID=$_POST['StudenID'];
   $ClassID=$_POST['ClassID'];
@@ -33,56 +34,20 @@ if(isset($_POST['submit'])){
   $InvoiceNumber=$_POST['InvoiceNumber'];
   $Other=$_POST['Other'];
   $PayBack=$_POST['PayBack'];
+  // if (empty($StudenID) || empty($ClassID) || empty($ManyMonths) || empty($Discount) || empty($StartDate) || empty($EndDate) || empty($Payment))
+  if (empty($StudenID) || empty($ClassID) || empty($ManyMonths) || empty($StartDate) || empty($EndDate) || empty($Payment) || empty($PaymentDate)) {
+	  // header("Location: ../ViweClassRoom/ShowYearMonthDay.php");
+		        // exit();
+      $not= 000;
+          
+	}else{
+
   $sql="insert into `tbl_payment_old`(StudenID,ClassID,ManyMonths,Payment,StartDate,EndDate,Discount,PaymentDate,InvoiceNumber,Other,PayBack)values('$StudenID','$ClassID','$ManyMonths','$Payment','$StartDate','$EndDate','$Discount','$PaymentDate','$InvoiceNumber','$Other','$PayBack')";
 $result=mysqli_query($con,$sql);
-//     if($result){
-//         // echo"successfully";
-//         header('location:teacher.php');
-//     }
-//     else{
-//     die(mysqli_error($con));
-// }
-}
-?>
-<?php
-include '../connect_SPL/connect_SPL.php';
-if(isset($_POST['submit'])){
-  $StudenID=$_POST['StudenID'];
-  $ClassID=$_POST['ClassID'];
-  $ManyMonths=$_POST['ManyMonths'];
-  $Payment=$_POST['Payment'];
-  $StartDate=$_POST['StartDate'];
-  $EndDate=$_POST['EndDate'];
-  $Discount=$_POST['Discount'];
-  $PaymentDate=$_POST['PaymentDate'];
-  $InvoiceNumber=$_POST['InvoiceNumber'];
-  $Other=$_POST['Other'];
-  $PayBack=$_POST['PayBack'];
+
   $sql="insert into `datayear`(StudenID,ClassID,ManyMonths,Payment,StartDate,EndDate,Discount,PaymentDate,InvoiceNumber,Other,PayBack)values('$StudenID','$ClassID','$ManyMonths','$Payment','$StartDate','$EndDate','$Discount','$PaymentDate','$InvoiceNumber','$Other','$PayBack')";
 $result=mysqli_query($con,$sql);
-//     if($result){
-//         // echo"successfully";
-//         header('location:teacher.php');
-//     }
-//     else{
-//     die(mysqli_error($con));
-// }
-}
-?>
-<?php
-include '../connect_SPL/connect_SPL.php';
-if(isset($_POST['submit'])){
-  $StudenID=$_POST['StudenID'];
-  $ClassID=$_POST['ClassID'];
-  $ManyMonths=$_POST['ManyMonths'];
-  $Payment=$_POST['Payment'];
-  $StartDate=$_POST['StartDate'];
-  $EndDate=$_POST['EndDate'];
-  $Discount=$_POST['Discount'];
-  $PaymentDate=$_POST['PaymentDate'];
-  $InvoiceNumber=$_POST['InvoiceNumber'];
-  $Other=$_POST['Other'];
-  $PayBack=$_POST['PayBack'];
+
   $sql="insert into `tbl_payment`(StudenID,ClassID,ManyMonths,Payment,StartDate,EndDate,Discount,PaymentDate,InvoiceNumber,Other,PayBack)values('$StudenID','$ClassID','$ManyMonths','$Payment','$StartDate','$EndDate','$Discount','$PaymentDate','$InvoiceNumber','$Other','$PayBack')";
 $result=mysqli_query($con,$sql);
     if($result){
@@ -92,7 +57,7 @@ $result=mysqli_query($con,$sql);
     else{
     die(mysqli_error($con));
 }
-}
+}}
 ?>
 <!doctype html>
 <html lang="en">
@@ -122,15 +87,24 @@ $result=mysqli_query($con,$sql);
       date_default_timezone_set('Asia/Kolkata');
       $date2 =  date ("Y/m/d") ;
       ?>
+<?php
+      if ($not == "000"){
+        echo '
+        <center>
+<h1 style="color:black ; background-color:#f03030;">សុំទោស។អ្នកបញ្ចូលទិន្នន័យខ្វះហើយសូមបញ្ចូលម្ដងទៀត!!!</h1>
+</center>
+        ';
+      }
+      ?>
     <div class="container">
     <form method="post">
     
-    <div class="IP5">
+    <div class="SSS">
     <!-- <label >InvoiceNumber</label> -->
-    <input type="text" class="form-control" name="InvoiceNumber" value=<?php echo $PV;?>>
-    <input type="number" class="form-control" name="PayBack" value=<?php echo '0 $';?>>
+    <input type="text" class="form-control" name="InvoiceNumber" style="width:100px;height:20px;" value=<?php echo $PV;?>>
+    <input type="number" class="form-control" name="PayBack" style="width:100px;height:20px;" value=<?php echo '0 $';?>>
   </div><!-- បិទ<div class="IP5"> -->
-  <div class="IP6"></div>
+  <div class="IPP6"></div>
   
 <p class="font3">លេខវិក័យបត្រ: NVP<?php echo $PV;?></p>
     <div class="form-group">
@@ -154,7 +128,7 @@ $result=mysqli_query($con,$sql);
   <div class="form-group">
     <label >Discount</label>
     <input type="text" class="form-control"
-    placeholder="Enter your Discount" name="Discount">
+    placeholder="Enter your Discount" name="Discount" value=<?php echo '0';?>>
   </div>
 
   <div class="form-group">
@@ -193,7 +167,7 @@ $result=mysqli_query($con,$sql);
 <tr>
   <th>
 <a href="Payment.php" class="text-light"><input name="btnsearch" class="btn btn-danger" style="width:623px;height:50px;" value="BACK"></a>
-<button type="submit" class="btn btn-primary" name="submit" style="width:622px;height:50px;" onclick="alert('AddPayment Successfully!!!')">Add</button>
+<button type="submit" class="btn btn-primary" name="submit" style="width:622px;height:50px;" >Add</button>
 </th>
 </tr>
 </form>

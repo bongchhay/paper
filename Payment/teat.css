@@ -67,23 +67,23 @@
   background-color: rgb(255, 255, 255);
 }
 
-.IP5{
+.SSS{
   position: absolute;
-  top: 2px;
-  left: 1000px;
+  top: 62px;
+  left: 1100px;
   width: 100px;
-  height: 100px;
+  height: 40px;
   /* border: 2px solid #000000; */
   /* background-color: rgb(43, 2, 228);     */
 
 }
 
-.IP6{
+.IPP6{
   position: absolute;
-  top: 2px;
-  left: 1000px;
+  top: 62px;
+  left: 1100px;
   width: 100px;
-  height: 100px;
+  height: 40px;
   /* border: 2px solid #000000; */
   background-color: rgb(255, 255, 255);    
 
