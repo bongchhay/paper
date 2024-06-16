@@ -3,6 +3,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <link rel="stylesheet" href="teat.css">
+        <link rel="stylesheet" href="dara.css">
         <script src="teat.js"></script>
         <title>联华学校</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
@@ -198,9 +199,10 @@ if(isset($_POST['submit'])){
     placeholder="Enter your PaymentDate" name="PaymentDate" autocomplete="off" value=<?php echo $PaymentDate;?>>
   </div>
 
-  <div class="IP5">
+  <div class="GGG">
     <input type="text" class="form-control" placeholder="Enter your InvoiceNumber" name="InvoiceNumber" autocomplete="off" value=<?php echo $InvoiceNumber;?>>
   </div>
+  <div class="GGG1"></div>
   <div class="IP6"></div>
 
   <div class="form-group">

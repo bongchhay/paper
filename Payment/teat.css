@@ -78,6 +78,17 @@
 
 }
 
+.GGG{
+  position: absolute;
+  top: 62px;
+  left: 1100px;
+  width: 100px;
+  height: 40px;
+  /* border: 2px solid #000000; */
+  /* background-color: rgb(43, 2, 228);     */
+
+}
+
 .IPP6{
   position: absolute;
   top: 62px;
