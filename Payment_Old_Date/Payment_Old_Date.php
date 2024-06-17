@@ -8,10 +8,12 @@ if(isset($_GET['page']))
 else{
     $page = 1;
 }
- $num_per_page = 10;
+ $num_per_page = 5;
  $start_from = ($page-1)*05;
 
- $sql="Select * from `tbl_payment_old` limit $start_from,$num_per_page";
+//  $sql="Select * from `tbl_payment_old` limit $start_from,$num_per_page";
+            // ដំរាប់ពីធំទៅតូច
+            $sql="SELECT * FROM tbl_payment_old ORDER BY InvoiceNumber DESC limit $start_from,$num_per_page ";
  $result=mysqli_query($con,$sql);
 
 ?>
@@ -73,7 +75,8 @@ else{
 <div class="scroll">
 <table border="2" >
   <thead>
-    <tr> <th scope="col"><center><input type="text" class="search-input" style="width:50px;text-align: center;" placeholder="ID"></center></th>
+    <!-- <tr> <th scope="col"><center><input type="text" class="search-input" style="width:50px;text-align: center;" placeholder="ID"></center></th> -->
+    <th scope="col"><center><input type="text" class="search-input" style="width:150px;text-align: center;" placeholder="លេខវិក័យបត្រ"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:100px;text-align: center;" placeholder="IDសិស្ស"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:110px;text-align: center;" placeholder="IDថ្នាក់រៀន"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:110px;text-align: center;" placeholder="ចំនូនខែ"></center></th>
@@ -85,7 +88,6 @@ else{
       <th scope="col"><center><input type="text" class="search-input" style="width:150px;text-align: center;" placeholder="ចំនួនលុយសង"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:150px;text-align: center;" placeholder="ខែដែលសង"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:150px;text-align: center;" placeholder="ថ្ងៃមកបង់"></center></th>
-      <th scope="col"><center><input type="text" class="search-input" style="width:150px;text-align: center;" placeholder="លេខវិក័យបត្រ"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:100px;text-align: center;" placeholder="ផ្សេងៗ"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:170px;text-align: center;" placeholder="កែប្រែ/លុប"></center></th>
     </tr>
@@ -94,7 +96,7 @@ else{
 
     <?php
       //  $sql="Select * from `tbl_payment_old`";
-       $result=mysqli_query($con,$sql);
+      //  $result=mysqli_query($con,$sql);
        if($result){
         while($row=mysqli_fetch_assoc($result)){
           $id=$row['ID'];
@@ -114,10 +116,10 @@ else{
           $date2 =  date ("Y/m/d") ;
           $dateTimestamp1 = strtotime($EndDate);
           $dateTimestamp2 = strtotime($date2);
-          
+          // <td style="text-align: center;">POD'.$id.'</td>
           if ($dateTimestamp1 > $dateTimestamp2){//（ដល់ថ្ងៃបង់ <= មិនទាន់ដល់  ）
             echo'<tr>
-            <td style="text-align: center;">POD'.$id.'</td>
+            <td style="text-align: center;">NVP'.$InvoiceNumber.'</td>
             <td style="text-align: center;">S'.$StudenID.'</td>
             <td style="text-align: center;">C'.$ClassID.'</td>
             <td style="text-align: center;">'.$ManyMonths.' ខែ</td>
@@ -129,7 +131,6 @@ else{
             <td style="text-align: center;">'.$PayBack.' $</td>
             <td style="text-align: center;">'.$BackMonth.'</td>
             <td style="text-align: center;">'.$PaymentDate.'</td>
-            <td style="text-align: center;">NVP'.$InvoiceNumber.'</td>
             <td style="text-align: center;">'.$Other.'</td>
             <td style="text-align: center;">
           <form method="POST" action="delete.php?deleteid='.$id.'" onsubmit="return submitForm(this);">
@@ -140,7 +141,7 @@ else{
           }
           else{
             echo'<tr>
-            <td style="text-align: center;">POD'.$id.'</td>
+            <td style="text-align: center;">NVP'.$InvoiceNumber.'</td>
             <td style="text-align: center;">S'.$StudenID.'</td>
             <td style="text-align: center;">C'.$ClassID.'</td>
             <td style="text-align: center;">'.$ManyMonths.' ខែ</td>
@@ -152,7 +153,6 @@ else{
             <td style="text-align: center;">'.$PayBack.' $</td>
             <td style="text-align: center;">'.$BackMonth.'</td>
             <td style="text-align: center;">'.$PaymentDate.'</td>
-            <td style="text-align: center;">NVP'.$InvoiceNumber.'</td>
             <td style="text-align: center;">'.$Other.'</td>
             <td style="text-align: center;">
           <form method="POST" action="delete.php?deleteid='.$id.'" onsubmit="return submitForm(this);">
@@ -166,7 +166,9 @@ else{
   </tbody>
 </table>
 <?php
-       $sql="Select * from `tbl_payment_old`";
+      //  $sql="Select * from `tbl_payment_old`";
+                  // ដំរាប់ពីធំទៅតូច
+                  $sql="SELECT * FROM tbl_payment_old ORDER BY InvoiceNumber DESC";
       $pr_result = mysqli_query($con,$sql);
       $total_record = mysqli_num_rows($pr_result);
       

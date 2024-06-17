@@ -81,7 +81,9 @@ include '../connect_SPL/connect_SPL.php';
   </thead>
   <tbody>
     <?php
-       $sql="Select * from `tbl_student2`";
+      //  $sql="Select * from `tbl_student2`";
+                   // ដំរាប់ពីធំទៅតូច
+                   $sql="SELECT * FROM tbl_student2 ORDER BY ID DESC";
        $result=mysqli_query($con,$sql);
        if($result){
         while($row=mysqli_fetch_assoc($result)){

@@ -82,7 +82,9 @@ include '../connect_SPL/connect_SPL.php';
   </thead>
   <tbody>
     <?php
-       $sql="Select * from `tbl_student`";
+      //  $sql="Select * from `tbl_student`";
+                   // ដំរាប់ពីធំទៅតូច
+                   $sql="SELECT * FROM tbl_student ORDER BY ID DESC";
        $result=mysqli_query($con,$sql);
        if($result){
         while($row=mysqli_fetch_assoc($result)){

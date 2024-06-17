@@ -81,7 +81,9 @@ include '../connect_SPL/connect_SPL.php';
   <tbody>
 
     <?php
-       $sql="Select * from `newandold`";
+      //  $sql="Select * from `newandold`";
+                   // ដំរាប់ពីធំទៅតូច
+                   $sql="SELECT * FROM newandold ORDER BY ID DESC";
        $result=mysqli_query($con,$sql);
        if($result){
         while($row=mysqli_fetch_assoc($result)){
@@ -106,6 +108,7 @@ include '../connect_SPL/connect_SPL.php';
           $dateTimestamp2 = strtotime($date2);
           if ($dateTimestamp1 > $dateTimestamp2){//（ដល់ថ្ងៃបង់ <= មិនទាន់ដល់  ）
             echo'<tr>
+
             <td style="text-align: center;">NVP'.$InvoiceNumber.'</td>
             <td style="text-align: center;">S'.$StudenID.'</td>
             <td style="text-align: center;">C'.$ClassID.'</td>
@@ -130,6 +133,7 @@ include '../connect_SPL/connect_SPL.php';
             $yesrsDiff = floor($diffDate/(365*60*60*24));
             $mothDiff = floor(($diffDate-$yesrsDiff * 365*60*60*24)/(30*60*60*24));
             echo'<tr>
+
             <td style="text-align: center;">NVP'.$InvoiceNumber.'</td>
             <td style="text-align: center;">S'.$StudenID.'</td>
             <td style="text-align: center;">C'.$ClassID.'</td>

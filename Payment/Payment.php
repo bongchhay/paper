@@ -137,7 +137,9 @@ $result=mysqli_query($con,$sql);
   <tbody>
 
     <?php
-       $sql="Select * from `tbl_payment`";
+      //  $sql="Select * from `tbl_payment`";
+                   // ដំរាប់ពីធំទៅតូច
+                   $sql="SELECT * FROM tbl_payment ORDER BY ID DESC";
        $result=mysqli_query($con,$sql);
        if($result){
         while($row=mysqli_fetch_assoc($result)){

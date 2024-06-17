@@ -77,7 +77,7 @@ include '../connect_SPL/connect_SPL.php';
 <table border="2" width="100%" style="border-collapse:collapse;">
   <thead>
     <tr>
-    <th scope="col"><center><input type="text" class="search-input" style="width:50px;text-align: center;" placeholder="ID"></center></th>
+    <th scope="col"><center><input type="text" class="search-input" style="width:70px;text-align: center;" placeholder="ID"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:150px;text-align: center;" placeholder="ឈ្មោះខ្មែរ"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:110px;text-align: center;" placeholder="ឈ្មោះចិន"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:110px;text-align: center;" placeholder="ភេទ"></center></th>
@@ -89,7 +89,9 @@ include '../connect_SPL/connect_SPL.php';
   </thead>
   <tbody>
     <?php
-       $sql="Select * from `tbl_student_old`";
+      //  $sql="Select * from `tbl_student_old`";
+                   // ដំរាប់ពីធំទៅតូច
+                   $sql="SELECT * FROM tbl_student_old ORDER BY ID DESC";
        $result=mysqli_query($con,$sql);
        if($result){
         while($row=mysqli_fetch_assoc($result)){

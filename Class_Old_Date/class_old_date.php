@@ -80,7 +80,9 @@ include '../connect_SPL/connect_SPL.php';
   </thead>
   <tbody>
     <?php
-       $sql="Select * from `tbl_class_old`";
+      //  $sql="Select * from `tbl_class_old`";
+                   // ដំរាប់ពីធំទៅតូច
+                   $sql="SELECT * FROM tbl_class_old ORDER BY ID DESC";
        $result=mysqli_query($con,$sql);
        if($result){
         while($row=mysqli_fetch_assoc($result)){

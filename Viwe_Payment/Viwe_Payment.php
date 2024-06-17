@@ -45,7 +45,8 @@ include '../connect_SPL/connect_SPL.php';
 <table border="2" >
   <thead>
     <tr>
-    <th scope="col"><center><input type="text" class="search-input" style="width:50px;text-align: center;" placeholder="ID"></center></th>
+    <!-- <th scope="col"><center><input type="text" class="search-input" style="width:50px;text-align: center;" placeholder="ID"></center></th> -->
+    <th scope="col"><center><input type="text" class="search-input" style="width:150px;text-align: center;" placeholder="លេខវិក័យប័ត្រ"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:100px;text-align: center;" placeholder="ឈ្មោះចិន_ស"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:100px;text-align: center;" placeholder="ភេទ_ស"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:100px;text-align: center;" placeholder="ឈ្មោះចិន_គ"></center></th>
@@ -63,14 +64,15 @@ include '../connect_SPL/connect_SPL.php';
       <th scope="col"><center><input type="text" class="search-input" style="width:150px;text-align: center;" placeholder="ថ្ងៃត្រូវបង់ម្ដងទៀត"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:150px;text-align: center;" placeholder="ចំណាំ"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:150px;text-align: center;" placeholder="ថ្ងៃដែលមកបង់លុយ"></center></th>
-      <th scope="col"><center><input type="text" class="search-input" style="width:150px;text-align: center;" placeholder="លេខវិក័យប័ត្រ"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:100px;text-align: center;" placeholder="ផ្សេងៗ"></center></th>
     </tr>
   </thead>
   <tbody>
 
     <?php
-       $sql="Select * from `views_payment`";
+      //  $sql="Select * from `views_payment`";
+                  // ដំរាប់ពីធំទៅតូច
+                  $sql="SELECT * FROM views_payment ORDER BY InvoiceNumber DESC";
        $result=mysqli_query($con,$sql);
        if($result){
         while($row=mysqli_fetch_assoc($result)){
@@ -97,10 +99,10 @@ include '../connect_SPL/connect_SPL.php';
           $date2 =  date ("Y/m/d") ;
           $dateTimestamp1 = strtotime($EndDate);
           $dateTimestamp2 = strtotime($date2);
-          
+          // <td style="text-align: center;">P'.$id.'</td>
           if ($dateTimestamp1 > $dateTimestamp2){//（ដល់ថ្ងៃបង់ <= មិនទាន់ដល់  ）
             echo'<tr>
-            <td style="text-align: center;">P'.$id.'</td>
+            <td style="text-align: center;">NVP'.$InvoiceNumber.'</td>
             <td style="text-align: center;">'.$SChineseName.'</td>
             <td style="text-align: center;">'.$SGender.'</td>
             <td style="text-align: center;">'.$TChineseName.'</td>
@@ -118,14 +120,13 @@ include '../connect_SPL/connect_SPL.php';
             <td style="text-align: center;">'.$EndDate.'</td>
             <td style="text-align: center;">មិនទាន់ដល់ថ្ងែបង់</td>
             <td style="text-align: center;">'.$PaymentDate.'</td>
-            <td style="text-align: center;">NVP'.$InvoiceNumber.'</td>
             <td style="text-align: center;">'.$Other.'</td>
             </tr>';
          
           }
           else{
             echo'<tr>
-            <td style="text-align: center;">P'.$id.'</td>
+            <td style="text-align: center;">NVP'.$InvoiceNumber.'</td>
             <td style="text-align: center;">'.$SChineseName.'</td>
             <td style="text-align: center;">'.$SGender.'</td>
             <td style="text-align: center;">'.$TChineseName.'</td>
@@ -143,7 +144,6 @@ include '../connect_SPL/connect_SPL.php';
             <td style="text-align: center;"><div class="fbtn btn-danger">'.$EndDate.'</div></td>
             <td style="text-align: center;"><div class="fbtn btn-danger">ដល់ថ្ងែបង់ប្រាក់</div></td>
             <td style="text-align: center;">'.$PaymentDate.'</td>
-            <td style="text-align: center;">NVP'.$InvoiceNumber.'</td>
             <td style="text-align: center;">'.$Other.'</td>
             </tr>';
           }

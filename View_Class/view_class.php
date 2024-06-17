@@ -67,7 +67,9 @@ include '../connect_SPL/connect_SPL.php';
   </thead>
   <tbody>
     <?php
-       $sql="Select * from `view_class`";
+      //  $sql="Select * from `view_class`";
+                   // ដំរាប់ពីធំទៅតូច
+                   $sql="SELECT * FROM view_class ORDER BY ID DESC";
        $result=mysqli_query($con,$sql);
        if($result){
         while($row=mysqli_fetch_assoc($result)){
