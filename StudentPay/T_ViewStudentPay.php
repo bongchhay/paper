@@ -66,7 +66,7 @@
   </thead>
   <tbody>
     <?php
-       $sql="Select * from `viewstudentpayment`";
+       $sql="Select * from `viewstudentpayment` ORDER BY InvoiceNumber DESC";
        $result=mysqli_query($con,$sql);
        if($result){
         while($row=mysqli_fetch_assoc($result)){

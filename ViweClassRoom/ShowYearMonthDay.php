@@ -124,7 +124,7 @@ if(isset($_POST['submit'])){
      Other,
      PayBack,
      BackMonth
-          FROM newandold WHERE PaymentDate='$StartDate'";
+          FROM newandold WHERE PaymentDate='$StartDate' ORDER BY InvoiceNumber DESC";
           $result = $con->query($sql);
           if ($result->num_rows > 0) {
             $totalPrice = 0;

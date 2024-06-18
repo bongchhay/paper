@@ -124,7 +124,7 @@ if(isset($year) && isset($month)) {
     // $month = mysqli_real_escape_string($con, $_GET['month']);
 
     // Construct SQL query to fetch data for the specified year and month
-    $sql = "SELECT * FROM newandold WHERE YEAR(StartDate) = $year AND MONTH(StartDate) = $month";
+    $sql = "SELECT * FROM newandold WHERE YEAR(StartDate) = $year AND MONTH(StartDate) = $month ORDER BY InvoiceNumber DESC";
     $result = $con->query($sql);
     $totalPrice = 0;
     $rowCount = 0; 

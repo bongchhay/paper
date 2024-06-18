@@ -102,7 +102,7 @@ include '../connect_SPL/connect_SPL.php'; ?>
 
 <?php
 if($year > "1"){
-  $sql = "SELECT * FROM newandold WHERE YEAR(PaymentDate) = '$year'";
+  $sql = "SELECT * FROM newandold WHERE YEAR(PaymentDate) = '$year' ORDER BY InvoiceNumber DESC";
   $result = $con->query($sql);
   $totalPrice = 0;
   $rowCount = 0; 

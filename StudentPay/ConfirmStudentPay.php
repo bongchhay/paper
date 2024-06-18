@@ -95,7 +95,7 @@
   </thead>
   <tbody>
     <?php
-       $sql="Select * from `studentpay`";
+       $sql="Select * from `studentpay` ORDER BY InvoiceNumber DESC";
        $result=mysqli_query($con,$sql);
        if($result){
         while($row=mysqli_fetch_assoc($result)){
@@ -109,8 +109,8 @@
           $DateClickToPay=$row['DateClickToPay'];
           echo'<tr>
           <td style="text-align: center;">VOP'.$InvoiceNumber.'</td>
-          <td style="text-align: center;">'.$StudantID.'</td>
-          <td style="text-align: center;">'.$ClassID.'</td>
+          <td style="text-align: center;">S'.$StudantID.'</td>
+          <td style="text-align: center;">C'.$ClassID.'</td>
           <td style="text-align: center;">'.$PayMonthly.'</td>
           <td style="text-align: center;">'.$PhoneNumber.'</td>
           <td style="text-align: center;">'.$text.'</td>

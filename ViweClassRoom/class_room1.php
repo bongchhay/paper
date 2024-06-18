@@ -68,7 +68,7 @@ include '../connect_SPL/connect_SPL.php'; ?>
 <table border="2" >
   <thead>
     <tr>
-    <th scope="col"><center><input type="text" class="search-input" style="width:50px;text-align: center;" placeholder="ID"></center></th>
+    <th scope="col"><center><input type="text" class="search-input" style="width:100px;text-align: center;" placeholder="Student_ID"></center></th>
     <th scope="col"><center><input type="text" class="search-input" style="width:100px;text-align: center;" placeholder="ឈ្មោះចិន_ស"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:100px;text-align: center;" placeholder="ភេទ_ស"></center></th>
       <th scope="col"><center><input type="text" class="search-input" style="width:100px;text-align: center;" placeholder="ឈ្មោះចិន_គ"></center></th>
@@ -124,8 +124,9 @@ if(isset($_POST['submit'])){
           InvoiceNumber,
           Other,
           PayBack,
-          BackMonth
-          FROM views_payment WHERE T_ChineseName='$name' AND BookLevel='$book' AND StudyTime='$time' AND StudyDay='$day'";
+          BackMonth,
+          StudenID
+          FROM views_payment WHERE T_ChineseName='$name' AND BookLevel='$book' AND StudyTime='$time' AND StudyDay='$day'  ORDER BY StudenID ASC";
           $result = $con->query($sql);
           if ($result->num_rows > 0) {
             // output data of each row
@@ -142,7 +143,7 @@ if(isset($_POST['submit'])){
               
               if ($dateTimestamp1 > $dateTimestamp2){//（ដល់ថ្ងៃបង់ <= មិនទាន់ដល់  ）
                 echo'<tr>
-                <td style="text-align: center;">C'.$row["ID"].'</td>
+                <td style="text-align: center;">S'.$row["StudenID"].'</td>
                 <td style="text-align: center;">'.$row["S_ChineseName"].'</td>
                 <td style="text-align: center;">'.$row["S_Gender"].'</td>
                 <td style="text-align: center;">'.$row["T_ChineseName"].'</td>
@@ -172,7 +173,7 @@ if(isset($_POST['submit'])){
             $yesrsDiff = floor($diffDate/(365*60*60*24));
             $mothDiff = floor(($diffDate-$yesrsDiff * 365*60*60*24)/(30*60*60*24));
                 echo'<tr>
-                <td style="text-align: center;">C'.$row["ID"].'</td>
+                <td style="text-align: center;">S'.$row["StudenID"].'</td>
                 <td style="text-align: center;">'.$row["S_ChineseName"].'</td>
                 <td style="text-align: center;">'.$row["S_Gender"].'</td>
                 <td style="text-align: center;">'.$row["T_ChineseName"].'</td>

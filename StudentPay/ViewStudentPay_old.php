@@ -77,7 +77,7 @@
   </thead>
   <tbody>
     <?php
-       $sql="Select * from `studentpay_old`";
+       $sql="Select * from `studentpay_old` ORDER BY InvoiceNumber DESC";
        $result=mysqli_query($con,$sql);
        if($result){
         while($row=mysqli_fetch_assoc($result)){
@@ -90,8 +90,8 @@
           $text=$row['text'];
           echo'<tr>
           <td style="text-align: center;">VOP'.$InvoiceNumber.'</td>
-          <td style="text-align: center;">'.$StudantID.'</td>
-          <td style="text-align: center;">'.$ClassID.'</td>
+          <td style="text-align: center;">S'.$StudantID.'</td>
+          <td style="text-align: center;">C'.$ClassID.'</td>
           <td style="text-align: center;">'.$PayMonthly.'</td>
           <td style="text-align: center;">'.$PhoneNumber.'</td>
           <td><center><img src="images/'.$row['image'].'" width="250" height="300"></center></td>
